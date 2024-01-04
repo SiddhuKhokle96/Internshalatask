@@ -5,16 +5,21 @@ import { executeQuery } from '../lib/db';
 export default function Input() {
   const router = useRouter();
   const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
-  const [establishedYear, setEstablishedYear] = useState('');
+  const [City, setLocation] = useState('');
+  const [State, setState] = useState('');
+  const [Contact, setContact] = useState('');
+  const [Email, setEmail] = useState('');
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await executeQuery('INSERT INTO school_data (name, location, established_year) VALUES (?, ?, ?)', [
+      await executeQuery('INSERT INTO school_data (name,City,State,Contact,Email,) VALUES (?, ?, ?, ?, ?)', [
         name,
-        location,
-        establishedYear,
+        City,
+        State,
+        Contact,
+        Email,
       ]);
       router.push('/fetch');
     } catch (error) {
@@ -34,15 +39,27 @@ export default function Input() {
         />
         <input
           type="text"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          placeholder="City"
+          value={City}
+          onChange={(e) => setCity(e.target.value)}
+        />
+         <input
+          type="text"
+          placeholder="State"
+          value={State}
+          onChange={(e) => setState(e.target.value)}
         />
         <input
           type="text"
-          placeholder="Established Year"
-          value={establishedYear}
-          onChange={(e) => setEstablishedYear(e.target.value)}
+          placeholder="Contact"
+          value={Contact}
+          onChange={(e) => setContact(e.target.value)}
+        />
+         <input
+          type="text"
+          placeholder="Email"
+          value={Email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <button type="submit">Submit</button>
       </form>
